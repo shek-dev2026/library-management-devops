@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f2f5f9;
+            margin: 0;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1 {
+            color: #234;
+            text-align: center;
+        }
+
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+        }
+
+        button {
+            cursor: pointer;
+            background: #1769aa;
+            color: white;
+            border: none;
+            border-radius: 4px;
+        }
+
+        li {
+            margin: 15px 0;
+        }
+
+        .delete {
+            background: #c62828;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📚 Library Management System</h1>
+
+        <h2>Add a Book</h2>
+
+        <form action="/add" method="POST">
+            <input type="text" name="title"
+                   placeholder="Book title" required>
+
+            <input type="text" name="author"
+                   placeholder="Author name" required>
+
+            <button type="submit">Add Book</button>
+        </form>
+
+        <h2>Available Books</h2>
+
+        <ul>
+            {% for book in books %}
+            <li>
+                <strong>{{ book[1] }}</strong>
+                — {{ book[2] }}
+
+                <form action="/delete/{{ book[0] }}"
+                      method="POST" style="display:inline;">
+                    <button class="delete" type="submit">
+                        Delete
+                    </button>
+                </form>
+            </li>
+            {% else %}
+            <li>No books added yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>
